@@ -8,9 +8,9 @@ urlpatterns = [
     path('<int:question_id>/vote', views.Vote.as_view(), name='vote'),
     path('newq/', views.NewQuestion.as_view(), name='newquestion'),
     path('newc/', views.NewChoice.as_view(), name='newchoice'),
-    path('newc/', views.NewChoice.as_view(), name='newchoice'),
     path('register/', views.register, name='register'),
     path('login/', views.LogInUser.as_view(), name='login'),
     path('logout/', views.LogUserOut, name='logout'),
+    path('api/questions', views.question_list_api, name='questionListApi'),
     # path('Q', views.Q.as_view(), name='Q'),
 ]

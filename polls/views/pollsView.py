@@ -38,8 +38,8 @@ class Index(View):
                    'view_count': view_count}
 
         # request.session['view_count'] = view_count + 1
-        resp = render(request=request, template_name='polls/index.html', context=context)
-        resp.set_cookie('view_count', view_count + 1)
+        resp = render(request=request,template_name='polls/index.html', context=context)
+        resp.set_cookie('view_count', str(int(view_count) + 1))
         return resp
 
 
