@@ -3,8 +3,9 @@ from . import models
 
 
 class QuestionSerializer(serializers.Serializer):
+    id = serializers.ReadOnlyField()
     question_text = serializers.CharField(max_length=200)
-    pub_date = serializers.DateTimeField('Date published')
+    pub_date = serializers.DateTimeField()
 
     def create(self, validated_data):
         return models.Question.objects.create(**validated_data)
@@ -12,14 +13,13 @@ class QuestionSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         instance.question_text = validated_data.get(
             'question_text', instance.question_text)
-        instance.pub_date = validated_data.get(
-            'question_text', instance.pub_date)
+        instance.pub_date = validated_data.get('pub_date', instance.pub_date)
 
         instance.save()
         return instance
 
 
-class ChoiseSerializer(serializers.ModelSerializer):
+class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Choice
         fields = '__all__'

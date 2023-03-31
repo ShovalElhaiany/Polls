@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # class Index(LoginRequiredMixin, generic.ListView):
 #     template_name = 'polls/index.html'
-#     context_object_name = "latest_question_list"
+#     context_object_name = "latest _question_list"
 
 #     def get_queryset(self):
 #         return Question.objects.order_by('-pub_date')
@@ -33,12 +33,13 @@ class Index(View):
         latest_question_list = Question.objects.order_by('-pub_date')[:5]
         # output = ', '.join([q.question_text for q in latest_question_list])
 
-        view_count = request.COOKIES.get('view_count')
+        view_count = request.COOKIES.get('view_count', 1)
         context = {"latest_question_list": latest_question_list,
                    'view_count': view_count}
 
         # request.session['view_count'] = view_count + 1
-        resp = render(request=request,template_name='polls/index.html', context=context)
+        resp = render(request=request,
+                      template_name='polls/index.html', context=context)
         resp.set_cookie('view_count', str(int(view_count) + 1))
         return resp
 
@@ -114,5 +115,5 @@ class Vote (View):
         choice.save()
         return HttpResponseRedirect(reverse('polls:detail', args={question_id}))
 
-    def get(self, request):
+    def get(self, request, question_id):
         return HttpResponse("THIS WAS A GET REQUEST")

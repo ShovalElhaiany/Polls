@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 
 
 class QuestionForm(forms.ModelForm):
-    question_text = forms.CharField(label='Question Text', max_length=200, validators=[])
+    question_text = forms.CharField(
+        label='Question Text', max_length=200, validators=[])
     # pub_date = forms.DateTimeField(label='Date Published', input_formats=[
     #                                '%Y-%m-%d %h:%m:%s'], widget=forms.widgets.DateTimeInput(attrs={'type': 'datetime'}))
+
     class Meta:
         model = Question
         fields = '__all__'
@@ -52,19 +54,21 @@ class ChoiceForm(forms.ModelForm):
             raise errors
         return self.cleaned_data
 
+
 class UserForm(forms.ModelForm):
-    
+
     class Meta:
         model = User
-        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'is_active']
+        fields = ['username', 'password', 'first_name',
+                  'last_name', 'email', 'is_active']
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='User name', required=True)
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-        'placeholder': ('Current Password')
+            'placeholder': ('Current Password')
         }),
         error_messages={
-        'required': ('Please enter your current password.')
+            'required': ('Please enter your current password.')
         })
-    
