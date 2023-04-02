@@ -4,23 +4,31 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from ..models import Question, Choice
 from ..serializers import QuestionSerializer, ChoiceSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.mixins import CreateModelMixin,DestroyModelMixin, ListModelMixin, UpdateModelMixin, RetrieveModelMixin
+from rest_framework import generics
 
 
-@csrf_exempt
-def question_list_api(request):
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = QuestionSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-    elif request.method == 'GET':
-        questions = Question.objects.all()
-        serializer = QuestionSerializer(questions, many=True)
-        return JsonResponse(serializer.data, safe=False)
+class QuestionListApi(CreateModelMixin, ListModelMixin, generics.GenericAPIView):
+    # def post(self, request):
+    #     data = JSONParser().parse(request)
+    #     serializer = QuestionSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+    # def get(self, request):
+    #     questions = Question.objects.all()
+    #     serializer = QuestionSerializer(questions, many=True)
+    #     return JsonResponse(serializer.data, safe=False)
+    queryset=Question.objects.all()
+    serializer_class=QuestionSerializer
+
+    def get(self, request, *args, **kwargs):
+        self.list(request, *args, **kwargs)
 
 
-@csrf_exempt
 def question_details_api(request, pk):
     # question = get_object_or_404(Question, pk=pk)
     try:
@@ -42,6 +50,7 @@ def question_details_api(request, pk):
         return HttpResponse(status=204)
 
 
+@api_view(['GET','POST'])
 @csrf_exempt
 def choice_list_api(request):
     if request.method == 'POST':
@@ -56,6 +65,7 @@ def choice_list_api(request):
         return JsonResponse(serializer.data, safe=False)
 
 
+@api_view(['GET','PUT','DELETE'])
 @csrf_exempt
 def choice_details_api(request, pk):
     # question = get_object_or_404(Question, pk=pk)
