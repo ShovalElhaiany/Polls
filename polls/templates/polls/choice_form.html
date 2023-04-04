@@ -1,3 +1,4 @@
+{% extends 'polls/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +10,14 @@
 </head>
 
 <body>
+    {% block content %}
     <form method="post" action={% url 'polls:newchoice' %}>
         {% csrf_token %}
         {{ question.question_text }}
         {{ form.as_p }}
         <input type="submit" value="send" />
     </form>
+    {% endblock %}
 </body>
 
 </html>

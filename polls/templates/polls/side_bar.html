@@ -1,0 +1,17 @@
+{% load static %}
+<link rel='stylesheet' href="{% static 'polls/side_bar.css' %}">
+
+<div id="main" class="main">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right -->
+<div id="mySidenav" class="Sidenav">
+    <a href="{% url 'polls:index' %}">Index</a>
+    <a href="{% url 'polls:newquestion' %}">New Question</a>
+    <a href="{% url 'polls:newchoice' %}">New Choice</a>
+    <a href="{% url 'polls:register' %}">Register</a>
+</div>

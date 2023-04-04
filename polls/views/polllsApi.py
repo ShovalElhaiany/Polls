@@ -7,26 +7,42 @@ from ..serializers import QuestionSerializer, ChoiceSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from rest_framework.mixins import CreateModelMixin,DestroyModelMixin, ListModelMixin, UpdateModelMixin, RetrieveModelMixin
+from rest_framework.mixins import CreateModelMixin, DestroyModelMixin, ListModelMixin, UpdateModelMixin, RetrieveModelMixin
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
-class QuestionListApi(CreateModelMixin, ListModelMixin, generics.GenericAPIView):
-    # def post(self, request):
-    #     data = JSONParser().parse(request)
-    #     serializer = QuestionSerializer(data=data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-    # def get(self, request):
-    #     questions = Question.objects.all()
-    #     serializer = QuestionSerializer(questions, many=True)
-    #     return JsonResponse(serializer.data, safe=False)
-    queryset=Question.objects.all()
-    serializer_class=QuestionSerializer
+#  class QuestionListApi(CreateModelMixin, ListModelMixin, generics.GenericAPIView):
+# #class Choice_List_Api(APIView):
+#     # def post(self, request):
+#     #     data = JSONParser().parse(request)
+#     #     serializer = QuestionSerializer(data=data)
+#     #     if serializer.is_valid():
+#     #         serializer.save()
+#     #         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+#     #     else:
+#     #         return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+#     # def get(self, request):
+#     #     questions = Question.objects.all()
+#     #     serializer = QuestionSerializer(questions, many=True)
+#     #     return JsonResponse(serializer.data, safe=False)
 
-    def get(self, request, *args, **kwargs):
-        self.list(request, *args, **kwargs)
+#     queryset = Question.objects.all()
+#     serializer_class = QuestionSerializer
+
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+
+class QuestionListApi(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    # permission_classes=[IsAuthenticated]
+    permission_classes=[IsAuthenticatedOrReadOnly]
+    
 
 
 def question_details_api(request, pk):
@@ -50,22 +66,21 @@ def question_details_api(request, pk):
         return HttpResponse(status=204)
 
 
-@api_view(['GET','POST'])
-@csrf_exempt
-def choice_list_api(request):
-    if request.method == 'POST':
+class Choice_List_Api(APIView):
+    def post(self, request):
         data = JSONParser().parse(request)
         serializer = ChoiceSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-    elif request.method == 'GET':
+
+    def get(self, request):
         choices = Choice.objects.all()
         serializer = ChoiceSerializer(choices, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET','PUT','DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 @csrf_exempt
 def choice_details_api(request, pk):
     # question = get_object_or_404(Question, pk=pk)

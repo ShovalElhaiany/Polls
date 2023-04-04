@@ -14,7 +14,7 @@ urlpatterns = [
     path('api/questions', views.QuestionListApi.as_view(), name='questionListApi'),
     path('api/question/<int:pk>', views.question_details_api,
          name='questionDetailsApi'),
-    path('api/choices', views.choice_list_api, name='choiceListApi'),
+    path('api/choices', views.Choice_List_Api.as_view(), name='ChoiceListApi'),
     path('api/choice/<int:pk>', views.choice_details_api,
          name='choiceDetailsApi'),
     # path('Q', views.Q.as_view(), name='Q'),
