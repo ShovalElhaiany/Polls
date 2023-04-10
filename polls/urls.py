@@ -17,5 +17,6 @@ urlpatterns = [
     path('api/choices', views.Choice_List_Api.as_view(), name='ChoiceListApi'),
     path('api/choice/<int:pk>', views.choice_details_api,
          name='choiceDetailsApi'),
-    # path('Q', views.Q.as_view(), name='Q'),
 ]
+"""Using Q Class"""
+# path('Q', views.Q.as_view(), name='Q'),

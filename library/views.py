@@ -37,42 +37,45 @@ def api_root(request, format=None):
         'authors': reverse('library:authors-list', request=request, format=format)
     })
 
-    # # class BookApi(generics.GenericAPIView, CreateModelMixin, DestroyModelMixin, ListModelMixin, UpdateModelMixin, generics.):
-    # #     queryset = Book.objects.all()
-    # #     serializer_class = BookSerializer
 
-    # #     def get(self, request, *args, **kwargs):
-    # #         return self.list(request, *args, **kwargs)
+"""Another way to create an api view"""
+# class BookApi(generics.GenericAPIView, CreateModelMixin, DestroyModelMixin, ListModelMixin, UpdateModelMixin, generics.):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
 
-    # #     def post(self, request, *args, **kwargs):
-    # #         return self.create(request, *args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
 
-    # #     def put(self, request, *args, **kwargs):
-    # #         return self.update(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
 
-    # #     def delete(self, request, *args, **kwargs):
-    # #         return self.destroy(request, *args, **kwargs)
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
 
-    # # class AuthorApi(generics.GenericAPIView, CreateModelMixin, DestroyModelMixin, ListModelMixin, UpdateModelMixin):
-    # #     queryset = Author.objects.all()
-    # #     serializer_class = AuthorSerializer
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
 
-    # #     def get(self, request, *args, **kwargs):
-    # #         return self.list(request, *args, **kwargs)
+# class AuthorApi(generics.GenericAPIView, CreateModelMixin, DestroyModelMixin, ListModelMixin, UpdateModelMixin):
+#     queryset = Author.objects.all()
+#     serializer_class = AuthorSerializer
 
-    # #     def post(self, request, *args, **kwargs):
-    # #         return self.create(request, *args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
 
-    # #     def put(self, request, *args, **kwargs):
-    # #         return self.update(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
 
-    # #     def delete(self, request, *args, **kwargs):
-    # #         return self.destroy(request, *args, **kwargs)
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
 
-    # class BookApi(generics.CreateAPIView, generics.DestroyAPIView, generics.ListAPIView, generics.UpdateAPIView):
-    #     queryset = Book.objects.all()
-    #     serializer_class = BookSerializer
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
 
-    # class AuthorApi(generics.CreateAPIView, generics.DestroyAPIView, generics.ListAPIView, generics.UpdateAPIView):
-    #     queryset = Author.objects.all()
-    #     serializer_class = AuthorSerializer
+"""Another way to create an api view"""
+# class BookApi(generics.CreateAPIView, generics.DestroyAPIView, generics.ListAPIView, generics.UpdateAPIView):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
+
+# class AuthorApi(generics.CreateAPIView, generics.DestroyAPIView, generics.ListAPIView, generics.UpdateAPIView):
+#     queryset = Author.objects.all()
+#     serializer_class = AuthorSerializer

@@ -12,6 +12,9 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
+"""Two more ways to create an API Class:
+APIView
+Mixin"""
 #  class QuestionListApi(CreateModelMixin, ListModelMixin, generics.GenericAPIView):
 # #class Choice_List_Api(APIView):
 #     # def post(self, request):
@@ -41,11 +44,11 @@ class QuestionListApi(generics.ListCreateAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     # permission_classes=[IsAuthenticated]
-    permission_classes=[IsAuthenticatedOrReadOnly]
-    
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 def question_details_api(request, pk):
+    """A safe way to get an object from the DB"""
     # question = get_object_or_404(Question, pk=pk)
     try:
         question = Question.objects.get(pk=pk)
@@ -83,7 +86,6 @@ class Choice_List_Api(APIView):
 @api_view(['GET', 'PUT', 'DELETE'])
 @csrf_exempt
 def choice_details_api(request, pk):
-    # question = get_object_or_404(Question, pk=pk)
     try:
         choice = Choice.objects.get(pk=pk)
     except:

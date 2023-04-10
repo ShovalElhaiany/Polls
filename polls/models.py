@@ -9,7 +9,6 @@ def validateCleanLang(value):
     CURSES = ('dumbass', 'moron')
     for curse in CURSES:
         if curse in value:
-            # self.add_error('question_text', 'Bed word detected')
             raise forms.ValidationError('Bed word detected')
 
 

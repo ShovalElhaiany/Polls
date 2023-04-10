@@ -1,11 +1,11 @@
 body {
     flex: auto;
     background-image: url('./images/background.png');
-    margin-top: 80px ;
+    margin-top: 80px;
 }
 
 div {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: cornflowerblue;
 }
 
@@ -16,20 +16,20 @@ div a {
 
 
 
-#header{
-    font-size:xx-large;
+#header {
+    font-size: xx-large;
 }
 
-#main_content{
-font-size: 20px;
+#main_content {
+    font-size: 20px;
 }
 
-#footer{
+#footer {
     position: fixed;
     bottom: 40px;
     width: 100%;
 }
 
-a:hover{
+a:hover {
     color: #f1f1f1;
 }

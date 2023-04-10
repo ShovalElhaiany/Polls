@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(redirect_field_name='polls/login.html')
 def register(request):
+    """Another way to restrict View for authenticated users only"""
     # if request.user.is_authenticated:
+
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
